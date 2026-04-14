@@ -1,0 +1,153 @@
+---
+// Mortgage Calculator Component
+---
+<div class="bg-white rounded-lg border border-brand-100 p-8 shadow-sm">
+  <h2 class="text-3xl font-display mb-3">Loan Calculator</h2>
+  <p class="text-brand-700 mb-8">Estimate your borrowing capacity</p>
+
+  <div class="space-y-8">
+    <!-- Annual Income -->
+    <div>
+      <div class="flex justify-between items-center mb-3">
+        <label for="income" class="text-lg text-brand-900">Annual Income</label>
+        <span id="income-display" class="text-xl font-semibold text-brand-900">$80,000</span>
+      </div>
+      <input
+        type="range"
+        id="income"
+        min="30000"
+        max="300000"
+        step="5000"
+        value="80000"
+        class="w-full h-2 bg-brand-100 rounded-lg appearance-none cursor-pointer slider"
+      />
+    </div>
+
+    <!-- Deposit Percentage -->
+    <div>
+      <div class="flex justify-between items-center mb-3">
+        <label for="deposit" class="text-lg text-brand-900">Deposit Percentage</label>
+        <span id="deposit-display" class="text-xl font-semibold text-brand-900">20%</span>
+      </div>
+      <input
+        type="range"
+        id="deposit"
+        min="5"
+        max="50"
+        step="5"
+        value="20"
+        class="w-full h-2 bg-brand-100 rounded-lg appearance-none cursor-pointer slider"
+      />
+    </div>
+
+    <!-- Loan Term -->
+    <div>
+      <div class="flex justify-between items-center mb-3">
+        <label for="term" class="text-lg text-brand-900">Loan Term</label>
+        <span id="term-display" class="text-xl font-semibold text-brand-900">30 years</span>
+      </div>
+      <input
+        type="range"
+        id="term"
+        min="5"
+        max="30"
+        step="5"
+        value="30"
+        class="w-full h-2 bg-brand-100 rounded-lg appearance-none cursor-pointer slider"
+      />
+    </div>
+
+    <!-- Result -->
+    <div class="bg-brand-50 rounded-lg p-6 mt-8">
+      <div class="text-sm text-brand-700 mb-2">Estimated Purchase Price</div>
+      <div class="text-4xl font-display font-semibold text-brand-900 mb-2" id="result">$600,000</div>
+      <div class="text-sm text-brand-700">Based on DTI 6x calculation</div>
+    </div>
+
+    <p class="text-sm text-brand-700 mt-4">
+      * For reference only. Actual loan amount is subject to bank approval.
+      <a href="#factors" class="text-accent-600 hover:underline">Learn about factors that affect approval ↗</a>
+    </p>
+  </div>
+</div>
+
+<style>
+  .slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #486581;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #486581;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .slider::-webkit-slider-runnable-track {
+    background: #d9e2ec;
+    border-radius: 4px;
+    height: 8px;
+  }
+
+  .slider::-moz-range-track {
+    background: #d9e2ec;
+    border-radius: 4px;
+    height: 8px;
+  }
+</style>
+
+<script>
+  const incomeSlider = document.getElementById('income') as HTMLInputElement;
+  const depositSlider = document.getElementById('deposit') as HTMLInputElement;
+  const termSlider = document.getElementById('term') as HTMLInputElement;
+
+  const incomeDisplay = document.getElementById('income-display');
+  const depositDisplay = document.getElementById('deposit-display');
+  const termDisplay = document.getElementById('term-display');
+  const resultDisplay = document.getElementById('result');
+
+  function formatCurrency(amount: number): string {
+    return new Intl.NumberFormat('en-NZ', {
+      style: 'currency',
+      currency: 'NZD',
+      maximumFractionDigits: 0,
+    }).format(amount);
+  }
+
+  function calculate() {
+    const income = parseInt(incomeSlider.value);
+    const depositPercent = parseInt(depositSlider.value);
+    const term = parseInt(termSlider.value);
+
+    // DTI 6x calculation
+    const loanAmount = income * 6;
+
+    // Calculate purchase price based on deposit percentage
+    // If deposit is 20%, loan is 80% of purchase price
+    const purchasePrice = loanAmount / (1 - (depositPercent / 100));
+
+    // Update displays
+    if (incomeDisplay) incomeDisplay.textContent = formatCurrency(income);
+    if (depositDisplay) depositDisplay.textContent = `${depositPercent}%`;
+    if (termDisplay) termDisplay.textContent = `${term} years`;
+    if (resultDisplay) resultDisplay.textContent = formatCurrency(purchasePrice);
+  }
+
+  // Add event listeners
+  incomeSlider.addEventListener('input', calculate);
+  depositSlider.addEventListener('input', calculate);
+  termSlider.addEventListener('input', calculate);
+
+  // Initial calculation
+  calculate();
+</script>

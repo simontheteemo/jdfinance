@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MortgageCalculator from '../components/MortgageCalculator.astro';
 import { base } from '../config';
 ---
 <BaseLayout
@@ -20,5 +21,9 @@ import { base } from '../config';
     >
       Get in touch
     </a>
+
+    <div class="mt-24">
+      <MortgageCalculator />
+    </div>
   </section>
 </BaseLayout>
