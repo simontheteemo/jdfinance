@@ -1,37 +1,138 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const email = 'hello@jdfinance.com';  // update to real email
-const phone = '+1 (555) 123-4567';    // update to real phone
+const email = 'jessie.jdfinance@gmail.com';
+const phone = '027 423 3413';
+const address = '7 St. Georges Bay Road, Parnell, Auckland 1052, New Zealand';
+const adviserName = 'Changqing Dai';
 ---
 <BaseLayout
   title="Contact — JD Finance"
-  description="Get in touch with JD Finance."
+  description="Get in touch with JD Finance. Contact Changqing Dai for expert financial advice on home loans, investment loans, and construction loans."
 >
-  <section class="mx-auto max-w-3xl px-6 py-24">
-    <h1 class="text-5xl">Get in touch</h1>
-    <p class="mt-8 text-lg text-brand-700">
-      We'd love to hear from you. Reach out via email or phone.
-    </p>
-    <dl class="mt-10 space-y-4">
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <div class="text-center mb-12">
+      <h1 class="text-5xl mb-4">Get in Touch</h1>
+      <p class="text-lg text-brand-700 max-w-2xl mx-auto">
+        Ready to discuss your financial goals? I'd love to hear from you. Reach out via email or phone to schedule a consultation.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <!-- Contact Information -->
       <div>
-        <dt class="font-semibold text-brand-900">Email</dt>
-        <dd>
-          <a href={`mailto:${email}`} class="text-accent-600 hover:underline">
-            {email}
-          </a>
-        </dd>
+        <div class="bg-brand-50 rounded-lg p-8 mb-8">
+          <h2 class="text-2xl font-semibold mb-6 text-brand-900">Contact Details</h2>
+
+          <dl class="space-y-6">
+            <div>
+              <dt class="text-sm font-semibold text-brand-900 mb-1">Financial Adviser</dt>
+              <dd class="text-brand-700 text-lg">{adviserName}</dd>
+            </div>
+
+            <div>
+              <dt class="text-sm font-semibold text-brand-900 mb-1">Email</dt>
+              <dd>
+                <a
+                  href={`mailto:${email}`}
+                  class="text-accent-600 hover:text-accent-500 transition-colors text-lg flex items-center gap-2"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  {email}
+                </a>
+              </dd>
+            </div>
+
+            <div>
+              <dt class="text-sm font-semibold text-brand-900 mb-1">Phone</dt>
+              <dd>
+                <a
+                  href={`tel:${phone.replace(/\s/g, '')}`}
+                  class="text-accent-600 hover:text-accent-500 transition-colors text-lg flex items-center gap-2"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                  </svg>
+                  {phone}
+                </a>
+              </dd>
+            </div>
+
+            <div>
+              <dt class="text-sm font-semibold text-brand-900 mb-1">Office Address</dt>
+              <dd class="text-brand-700 flex items-start gap-2">
+                <svg class="w-5 h-5 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span>{address}</span>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="mt-8 pt-8 border-t border-brand-100">
+            <h3 class="text-sm font-semibold text-brand-900 mb-3">Office Hours</h3>
+            <p class="text-brand-700">Monday - Friday: 9:00 AM - 5:00 PM</p>
+            <p class="text-brand-700 text-sm mt-2">Appointments available outside of business hours by arrangement</p>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <a
+          href={`mailto:${email}`}
+          class="w-full block text-center bg-brand-900 text-white px-8 py-4 hover:bg-accent-600 transition-colors rounded-lg font-semibold"
+        >
+          Send an Email
+        </a>
       </div>
+
+      <!-- Map -->
       <div>
-        <dt class="font-semibold text-brand-900">Phone</dt>
-        <dd>{phone}</dd>
+        <div class="bg-white border border-brand-100 rounded-lg overflow-hidden shadow-sm">
+          <div class="aspect-[4/3]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.5329877986434!2d174.77639231531856!3d-36.85134397993954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d47e7a2a1e2e9%3A0x506f8f8f8f8f8f8f!2s7%20St%20Georges%20Bay%20Rd%2C%20Parnell%2C%20Auckland%201052%2C%20New%20Zealand!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="JD Finance Office Location"
+            ></iframe>
+          </div>
+          <div class="p-4 bg-brand-50">
+            <p class="text-sm text-brand-700 text-center">
+              <strong class="text-brand-900">Office Location:</strong> Parnell, Auckland
+            </p>
+          </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="mt-6 bg-white border border-brand-100 rounded-lg p-6">
+          <h3 class="font-semibold text-brand-900 mb-3">Why Contact Me?</h3>
+          <ul class="space-y-2 text-brand-700">
+            <li class="flex gap-2">
+              <span class="text-accent-600">✓</span>
+              <span>Expert advice on home, investment, and construction loans</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-accent-600">✓</span>
+              <span>Access to a panel of trusted lenders</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-accent-600">✓</span>
+              <span>Personalized service tailored to your goals</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-accent-600">✓</span>
+              <span>Ongoing support with loan maintenance</span>
+            </li>
+          </ul>
+        </div>
       </div>
-    </dl>
-    <a
-      href={`mailto:${email}`}
-      class="mt-10 inline-block bg-brand-900 text-white px-8 py-3 hover:bg-accent-600 transition-colors"
-    >
-      Send us an email
-    </a>
+    </div>
   </section>
 </BaseLayout>
