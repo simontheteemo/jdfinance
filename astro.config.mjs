@@ -3,8 +3,9 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  // Update this to your real domain when you have it
-  site: 'https://jdfinance.com',
+  // GitHub Pages configuration (update when custom domain is ready)
+  site: 'https://simontheteemo.github.io',
+  base: '/jdfinance',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
