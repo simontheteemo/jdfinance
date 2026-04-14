@@ -57,11 +57,33 @@
       />
     </div>
 
+    <!-- Interest Rate -->
+    <div>
+      <div class="flex justify-between items-center mb-3">
+        <label for="interest" class="text-lg text-brand-900">Interest Rate</label>
+        <span id="interest-display" class="text-xl font-semibold text-brand-900">6.0%</span>
+      </div>
+      <input
+        type="range"
+        id="interest"
+        min="3"
+        max="10"
+        step="0.5"
+        value="6"
+        class="w-full h-2 bg-brand-100 rounded-lg appearance-none cursor-pointer slider"
+      />
+    </div>
+
     <!-- Result -->
     <div class="bg-brand-50 rounded-lg p-6 mt-8">
       <div class="text-sm text-brand-700 mb-2">Estimated Purchase Price</div>
       <div class="text-4xl font-display font-semibold text-brand-900 mb-2" id="result">$600,000</div>
       <div class="text-sm text-brand-700">Based on DTI 6x calculation</div>
+
+      <div class="mt-6 pt-6 border-t border-brand-200">
+        <div class="text-sm text-brand-700 mb-1">Total Interest Over Loan Term</div>
+        <div class="text-2xl font-display font-semibold text-brand-900" id="interest-result">$0</div>
+      </div>
     </div>
 
     <p class="text-sm text-brand-700 mt-4">
@@ -110,11 +132,14 @@
   const incomeSlider = document.getElementById('income') as HTMLInputElement;
   const depositSlider = document.getElementById('deposit') as HTMLInputElement;
   const termSlider = document.getElementById('term') as HTMLInputElement;
+  const interestSlider = document.getElementById('interest') as HTMLInputElement;
 
   const incomeDisplay = document.getElementById('income-display');
   const depositDisplay = document.getElementById('deposit-display');
   const termDisplay = document.getElementById('term-display');
+  const interestDisplay = document.getElementById('interest-display');
   const resultDisplay = document.getElementById('result');
+  const interestResultDisplay = document.getElementById('interest-result');
 
   function formatCurrency(amount: number): string {
     return new Intl.NumberFormat('en-NZ', {
@@ -128,6 +153,7 @@
     const income = parseInt(incomeSlider.value);
     const depositPercent = parseInt(depositSlider.value);
     const term = parseInt(termSlider.value);
+    const interestRate = parseFloat(interestSlider.value);
 
     // DTI 6x calculation
     const loanAmount = income * 6;
@@ -136,17 +162,34 @@
     // If deposit is 20%, loan is 80% of purchase price
     const purchasePrice = loanAmount / (1 - (depositPercent / 100));
 
+    // Calculate total interest over loan term
+    // Using monthly payment formula: M = P * [r(1+r)^n] / [(1+r)^n - 1]
+    // where P = loan amount, r = monthly interest rate, n = number of months
+    const monthlyRate = interestRate / 100 / 12;
+    const numberOfPayments = term * 12;
+
+    let totalInterest = 0;
+    if (monthlyRate > 0) {
+      const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
+                            (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+      const totalPaid = monthlyPayment * numberOfPayments;
+      totalInterest = totalPaid - loanAmount;
+    }
+
     // Update displays
     if (incomeDisplay) incomeDisplay.textContent = formatCurrency(income);
     if (depositDisplay) depositDisplay.textContent = `${depositPercent}%`;
     if (termDisplay) termDisplay.textContent = `${term} years`;
+    if (interestDisplay) interestDisplay.textContent = `${interestRate.toFixed(1)}%`;
     if (resultDisplay) resultDisplay.textContent = formatCurrency(purchasePrice);
+    if (interestResultDisplay) interestResultDisplay.textContent = formatCurrency(totalInterest);
   }
 
   // Add event listeners
   incomeSlider.addEventListener('input', calculate);
   depositSlider.addEventListener('input', calculate);
   termSlider.addEventListener('input', calculate);
+  interestSlider.addEventListener('input', calculate);
 
   // Initial calculation
   calculate();
