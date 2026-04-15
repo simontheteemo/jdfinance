@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MortgageCalculatorZh from '../../components/MortgageCalculatorZh.astro';
+import { base } from '../../config';
+---
+<BaseLayout
+  title="JD Finance — 值得信赖的金融服务"
+  description="JD Finance 为个人和企业提供量身定制的金融服务。"
+>
+  <section class="mx-auto max-w-6xl px-6 py-24">
+    <h1 class="text-5xl md:text-6xl max-w-3xl">
+      专业金融咨询，贴心为您服务。
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-brand-700">
+      JD Finance 帮助您做出明智的财务决策，提供符合您目标的专业建议。
+    </p>
+    <a
+      href={`${base}/zh/contact`}
+      class="mt-10 inline-block bg-brand-900 text-white px-8 py-3 hover:bg-accent-600 transition-colors"
+    >
+      联系我们
+    </a>
+
+    <div class="mt-24">
+      <MortgageCalculatorZh />
+    </div>
+  </section>
+</BaseLayout>
