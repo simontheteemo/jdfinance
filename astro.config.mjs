@@ -3,9 +3,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  // GitHub Pages configuration (update when custom domain is ready)
-  site: 'https://simontheteemo.github.io',
-  base: '/jdfinance',
+  site: 'https://www.jdfinance.co.nz',
+  base: '',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
