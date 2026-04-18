@@ -1,55 +1,31 @@
 ---
 import { base } from '../config';
-import { getLangFromUrl } from '../i18n/utils';
 
-const currentLang = getLangFromUrl(Astro.url);
-const isZh = currentLang === 'zh';
-
-const navItems = isZh
-  ? [
-      { href: `${base}/zh/`, label: '首页' },
-      { href: `${base}/zh/disclosure`, label: '披露指南' },
-      { href: `${base}/zh/contact`, label: '联系我们' },
-    ]
-  : [
-      { href: `${base}/`, label: 'Home' },
-      { href: `${base}/disclosure`, label: 'Disclosure' },
-      { href: `${base}/contact`, label: 'Contact' },
-    ];
-
-// Language switcher - toggle between current page in other language
-const currentPath = Astro.url.pathname.replace(base, '').replace('/zh', '');
-const langSwitchHref = isZh
-  ? `${base}${currentPath === '/' ? '' : currentPath}`
-  : `${base}/zh${currentPath === '/' ? '' : currentPath}`;
-const langSwitchLabel = isZh ? 'English' : '中文';
+const navItems = [
+  { href: `${base}/`, label: 'Home' },
+  { href: `${base}/disclosure`, label: 'Disclosure' },
+  { href: `${base}/privacy`, label: 'Privacy' },
+  { href: `${base}/contact`, label: 'Contact' },
+];
 ---
 <header class="border-b border-brand-100">
   <div class="mx-auto max-w-6xl px-6 py-5 flex items-center justify-between">
-    <a href={isZh ? `${base}/zh/` : `${base}/`} class="text-xl font-display font-semibold text-brand-900">
+    <a href={`${base}/`} class="text-xl font-display font-semibold text-brand-900">
       JD Finance
     </a>
-    <div class="flex items-center gap-8">
-      <nav>
-        <ul class="flex gap-8">
-          {navItems.map(({ href, label }) => (
-            <li>
-              <a
-                href={href}
-                class="text-brand-700 hover:text-accent-600 transition-colors"
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <a
-        href={langSwitchHref}
-        class="text-brand-700 hover:text-accent-600 transition-colors border-l border-brand-200 pl-8"
-      >
-        {langSwitchLabel}
-      </a>
-    </div>
+    <nav>
+      <ul class="flex gap-8">
+        {navItems.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class="text-brand-700 hover:text-accent-600 transition-colors"
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   </div>
 </header>
