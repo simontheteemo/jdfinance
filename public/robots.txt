@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.jdfinance.co.nz/sitemap-index.xml

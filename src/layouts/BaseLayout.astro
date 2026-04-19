@@ -31,11 +31,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="JD Finance" />
+    <meta property="og:locale" content="en_NZ" />
 
     {/* Twitter */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col bg-white">
     <Header />
