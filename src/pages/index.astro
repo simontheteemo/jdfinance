@@ -2,46 +2,48 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MortgageCalculator from '../components/MortgageCalculator.astro';
 import { base } from '../config';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "JD Finance",
+  "url": "https://www.jdfinance.co.nz",
+  "telephone": "+6427423413",
+  "email": "jessie.jdfinance@gmail.com",
+  "description": "Auckland-based mortgage adviser providing expert advice on home loans, investment loans, and construction loans.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "7 St. Georges Bay Road",
+    "addressLocality": "Parnell",
+    "addressRegion": "Auckland",
+    "postalCode": "1052",
+    "addressCountry": "NZ"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": -36.8513,
+    "longitude": 174.7786
+  },
+  "openingHours": "Mo-Fr 09:00-17:00",
+  "employee": {
+    "@type": "Person",
+    "name": "Changqing (Jessie) Dai",
+    "jobTitle": "Financial Adviser",
+    "email": "jessie.jdfinance@gmail.com",
+    "telephone": "+6427423413"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "New Zealand"
+  },
+  "serviceType": ["Home Loans", "Investment Loans", "Construction Loans", "Mortgage Advice"]
+});
 ---
 <BaseLayout
   title="JD Finance | Auckland Mortgage Adviser NZ"
   description="Auckland mortgage adviser helping New Zealanders secure home, investment & construction loans. Expert advice and personalised service from JD Finance."
 >
-  <script type="application/ld+json" slot="head" is:inline>{JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FinancialService",
-    "name": "JD Finance",
-    "url": "https://www.jdfinance.co.nz",
-    "telephone": "+6427423413",
-    "email": "jessie.jdfinance@gmail.com",
-    "description": "Auckland-based mortgage adviser providing expert advice on home loans, investment loans, and construction loans.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "7 St. Georges Bay Road",
-      "addressLocality": "Parnell",
-      "addressRegion": "Auckland",
-      "postalCode": "1052",
-      "addressCountry": "NZ"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": -36.8513,
-      "longitude": 174.7786
-    },
-    "openingHours": "Mo-Fr 09:00-17:00",
-    "employee": {
-      "@type": "Person",
-      "name": "Changqing (Jessie) Dai",
-      "jobTitle": "Financial Adviser",
-      "email": "jessie.jdfinance@gmail.com",
-      "telephone": "+6427423413"
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "New Zealand"
-    },
-    "serviceType": ["Home Loans", "Investment Loans", "Construction Loans", "Mortgage Advice"]
-  })}</script>
+  <script type="application/ld+json" slot="head" set:html={schema}></script>
   <section class="mx-auto max-w-6xl px-6 py-24">
     <h1 class="text-5xl md:text-6xl max-w-3xl">
       Financial clarity, personally delivered.
